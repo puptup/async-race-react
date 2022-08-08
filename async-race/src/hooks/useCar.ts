@@ -24,7 +24,7 @@ export const useCar = ({
   const stopEngine = useCallback(
     async (car: Car) => {
       if (car.engine) {
-        await fetch(`${ENGINE}?id=${car.id}&status=stopped`)
+        await fetch(`${ENGINE}?id=${car.id}&status=stopped`, { method: 'PATCH' })
       }
       car.engine = false
       car.timeToFinish = 0
