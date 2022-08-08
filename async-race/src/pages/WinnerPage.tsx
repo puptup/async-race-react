@@ -13,7 +13,6 @@ const WinnerPage: FC<WinnerPageProps> = () => {
   const [garage, setGarage] = useState<CarsForWinnersPage[]>([])
   const { page, IncrementPage, DecrementPage } = usePagination(
     COUNT_ELEMENTS_ON_WINNER_PAGE,
-    garage,
     winnersCount,
   )
   const [sorting, setSorting] = useState<{ sort: 'wins' | 'time'; order: 'desc' | 'asc' }>({

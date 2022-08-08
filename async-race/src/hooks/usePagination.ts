@@ -1,21 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
-import { COUNT_ELEMENTS_ON_GARAGE_PAGE } from '../consts'
-import { Car, CarsForWinnersPage } from '../types'
 
-export const usePagination = (
-  countElements: number,
-  garage: Car[] | CarsForWinnersPage[],
-  carsCount: number | undefined,
-) => {
+export const usePagination = (countElements: number, carsCount: number | undefined) => {
   const [page, setPage] = useState<number>()
 
   const IncrementPage = useCallback(() => {
     if (page && carsCount) {
-      if (page < carsCount / COUNT_ELEMENTS_ON_GARAGE_PAGE) {
+      if (page < carsCount / countElements) {
         setPage(page + 1)
       }
     }
-  }, [setPage, page, carsCount])
+  }, [setPage, page, carsCount, countElements])
 
   const DecrementPage = useCallback(() => {
     if (page) {
