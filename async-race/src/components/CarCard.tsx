@@ -77,7 +77,7 @@ const CarCard: FunctionComponent<CarCardProps> = ({
       <Button
         disabled={engine}
         onClick={() => {
-          drive(car)
+          drive(car).catch((_) => {})
         }}
       >
         A
