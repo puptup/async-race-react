@@ -15,7 +15,7 @@ const GarageList: FC<GarageListProps> = ({ garage, drive, stopDrive, removeCar, 
   return (
     <div>
       {garage
-        .sort((a, b) => a.name.localeCompare(b.name))
+        .sort((a, b) => a.id - b.id)
         .map((car) => (
           <CarCard
             key={car.id}
