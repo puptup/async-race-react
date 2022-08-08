@@ -32,7 +32,7 @@ const Garage: FC<GarageProps> = () => {
   )
 
   const getGarage = useCallback(() => {
-    fetch(`${GARAGE}?_page=${page}&_limit=${COUNT_ELEMENTS_ON_GARAGE_PAGE}&_sort=name`)
+    fetch(`${GARAGE}?_page=${page}&_limit=${COUNT_ELEMENTS_ON_GARAGE_PAGE}&_sort=id`)
       .then((res) => res.json())
       .then((res: Car[]) =>
         setGarage(
