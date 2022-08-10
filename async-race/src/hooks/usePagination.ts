@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 
-export const usePagination = (countElements: number, carsCount: number | undefined) => {
+export const usePagination = (
+  countElements: number,
+  carsCount: number | undefined,
+  pageKey: string,
+) => {
   const [page, setPage] = useState<number>()
 
   const IncrementPage = useCallback(() => {
@@ -20,17 +24,17 @@ export const usePagination = (countElements: number, carsCount: number | undefin
   }, [page, setPage])
 
   useEffect(() => {
-    const localPage = window.localStorage.getItem('page')
+    const localPage = window.localStorage.getItem(pageKey + 'page')
     if (localPage) {
       setPage(Number(localPage))
     } else {
       setPage(1)
     }
-  }, [])
+  }, [pageKey])
 
   useEffect(() => {
-    window.localStorage.setItem('page', String(page))
-  }, [page, setPage])
+    window.localStorage.setItem(pageKey + 'page', String(page))
+  }, [page, setPage, pageKey])
 
   return {
     page,

@@ -14,6 +14,7 @@ const WinnerPage: FC<WinnerPageProps> = () => {
   const { page, IncrementPage, DecrementPage } = usePagination(
     COUNT_ELEMENTS_ON_WINNER_PAGE,
     winnersCount,
+    'winner',
   )
   const [sorting, setSorting] = useState<{ sort: 'wins' | 'time'; order: 'desc' | 'asc' }>({
     sort: 'wins',

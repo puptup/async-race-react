@@ -29,6 +29,7 @@ const Garage: FC<GarageProps> = () => {
   const { page, IncrementPage, DecrementPage } = usePagination(
     COUNT_ELEMENTS_ON_GARAGE_PAGE,
     carsCount,
+    'garage',
   )
 
   const getGarage = useCallback(() => {
