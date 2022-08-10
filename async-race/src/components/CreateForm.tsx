@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { GARAGE } from '../consts'
 
@@ -6,35 +6,51 @@ interface InputFormProps {
   getGarage: () => void
 }
 
+const initState = {
+  name: '',
+  color: '#af6a6a',
+}
+
 const InputForm: FC<InputFormProps> = ({ getGarage }) => {
-  const [color, setColor] = useState('#af6a6a')
-  const [name, setName] = useState('')
+  const [state, setState] = useState<{ name: string; color: string }>(initState)
   const submit = useCallback(async () => {
-    if (name) {
+    if (state && state.name) {
       await fetch(`${GARAGE}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name,
-          color,
-        }),
+        body: JSON.stringify(state),
       })
-      setColor('#af6a6a')
-      setName('')
+      setState(initState)
       getGarage()
     }
-  }, [name, color, getGarage])
+  }, [state, getGarage])
+
+  useEffect(() => {
+    const newCar = window.localStorage.getItem('newCar')
+    if (newCar) {
+      setState(JSON.parse(newCar))
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log('test', state)
+    window.localStorage.setItem('newCar', JSON.stringify(state))
+  }, [state])
 
   return (
     <Form>
-      <Input type='text' value={name} onChange={(e) => setName(e.target.value)} />
+      <Input
+        type='text'
+        value={state.name}
+        onChange={(e) => setState({ ...state, name: e.target.value })}
+      />
       <Input
         type='color'
-        value={color}
+        value={state.color}
         onChange={(e) => {
-          setColor(e.target.value)
+          setState({ ...state, color: e.target.value })
         }}
       />
       <button
