@@ -62,7 +62,6 @@ const WinnerPage: FC<WinnerPageProps> = () => {
 
   const changeSortring = useCallback(
     (sortType: 'wins' | 'time') => {
-      console.log(sorting, sortType)
       switch (sortType) {
         case 'wins': {
           if (sorting.sort === 'wins') {
@@ -73,7 +72,6 @@ const WinnerPage: FC<WinnerPageProps> = () => {
           return
         }
         case 'time': {
-          console.log('do')
           if (sorting.sort === 'time') {
             setSorting((prev) => ({ ...prev, order: prev.order === 'asc' ? 'desc' : 'asc' }))
           } else {
