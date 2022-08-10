@@ -20,7 +20,10 @@ const InputForm: FC<InputFormProps> = ({ getGarage }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(state),
+        body: JSON.stringify({
+          name: state.name,
+          color: state.color,
+        }),
       })
       setState(initState)
       getGarage()
@@ -35,7 +38,6 @@ const InputForm: FC<InputFormProps> = ({ getGarage }) => {
   }, [])
 
   useEffect(() => {
-    console.log('test', state)
     window.localStorage.setItem('newCar', JSON.stringify(state))
   }, [state])
 

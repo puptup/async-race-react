@@ -22,8 +22,10 @@ const Garage: FC<GarageProps> = () => {
 
   useEffect(() => {
     const selectedCar = window.localStorage.getItem('selectedCar')
-    if (selectedCar) {
+    if (selectedCar && selectedCar !== 'undefined') {
       setCarToUpdate(JSON.parse(selectedCar))
+    } else {
+      setCarToUpdate(undefined)
     }
   }, [])
 
