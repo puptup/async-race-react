@@ -21,6 +21,17 @@ const Garage: FC<GarageProps> = () => {
   const [carsCount, setCarsCount] = useState<number>(0)
 
   useEffect(() => {
+    const selectedCar = window.localStorage.getItem('selectedCar')
+    if (selectedCar) {
+      setCarToUpdate(JSON.parse(selectedCar))
+    }
+  }, [])
+
+  useEffect(() => {
+    window.localStorage.setItem('selectedCar', JSON.stringify(carToUpdate))
+  }, [carToUpdate])
+
+  useEffect(() => {
     fetch(`${GARAGE}`)
       .then((res) => res.json())
       .then((res: Car[]) => setCarsCount(res.length))

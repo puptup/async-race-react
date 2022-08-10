@@ -25,6 +25,7 @@ const UpdateForm: FC<UpdateFormProps> = ({ getGarage, carToUpdate }) => {
       })
       setColor('')
       setName('')
+      window.localStorage.setItem('selectedCar', '')
       getGarage()
     }
   }, [name, color, getGarage, carToUpdate])
